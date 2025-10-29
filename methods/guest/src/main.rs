@@ -1,11 +1,16 @@
 use risc0_zkvm::guest::env;
+use std::ffi::{c_int, c_void};
+
+extern "C" {
+    fn free(ptr: *mut c_void);
+}
 
 extern "C" {
     fn lean_risc0_main(
         input: *const u8,
-        input_length: size_t,
+        input_length: usize,
         output: *mut *const u8,
-        output_length: *mut size_t,
+        output_length: *mut usize,
     ) -> c_int;
 }
 
@@ -34,12 +39,12 @@ fn safe_lean_risc0_main(input: Vec<u8>) -> Result<Vec<u8>, &'static str> {
     // If length is zero, don't form a slice from a NULL pointer!
     // from_raw_parts(NULL, 0) is UB, so special-case it.
     if len == 0 {
-        unsafe { libc::free(ptr as *mut c_void) };
+        unsafe { free(ptr as *mut c_void) };
         return Ok(Vec::new());
     }
 
     if len > isize::MAX as usize {
-        unsafe { libc::free(ptr as *mut c_void) };
+        unsafe { free(ptr as *mut c_void) };
         return Err("buffer length too large");
     }
 
@@ -51,7 +56,7 @@ fn safe_lean_risc0_main(input: Vec<u8>) -> Result<Vec<u8>, &'static str> {
 
     let vec = slice.to_vec();
 
-    unsafe { libc::free(ptr as *mut c_void) };
+    unsafe { free(ptr as *mut c_void) };
 
     Ok(vec)
 }

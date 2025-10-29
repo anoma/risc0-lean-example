@@ -1,10 +1,6 @@
 name = "guest"
 version = "0.1.0"
-defaultTargets = ["guest"]
+defaultTargets = ["Guest"]
 
 [[lean_lib]]
 name = "Guest"
-
-[[lean_exe]]
-name = "guest"
-root = "Main"

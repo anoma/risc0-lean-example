@@ -1,3 +1,9 @@
--- This module serves as the root of the `Guest` library.
--- Import modules here that should be built as part of the library.
 import Guest.Basic
+
+def risc0_main (input : ByteArray) : ByteArray :=
+  let str := String.fromUTF8! input
+  let n := str.toNat!
+  let result := sum n
+  let resultStr := toString result
+  let bytes := resultStr.toUTF8
+  bytes

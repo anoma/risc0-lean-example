@@ -1,10 +1,11 @@
 #include <lean/lean.h>
 
 extern lean_object* risc0_main(lean_object* input);
-extern lean_object* initialize_Guest(uintr32_t builtin, lean_object* world);
+extern lean_object* initialize_Guest(uint32_t builtin, lean_object* world);
+extern void lean_initialize_runtime_module();
 
 static lean_object* byte_array_from_c(const char* buf, size_t n) {
-    lean_object* ba = lean_mk_empty_byte_array(n);
+    lean_object* ba = lean_mk_empty_byte_array(lean_usize_to_nat(n));
     for (size_t i = 0; i < n; ++i) {
         ba = lean_byte_array_push(ba, (uint32_t)(uint8_t)buf[i]);
     }
