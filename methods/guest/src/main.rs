@@ -1,6 +1,8 @@
 use risc0_zkvm::guest::env;
 use std::ffi::{c_int, c_void};
 
+mod malloc;
+
 extern "C" {
     fn free(ptr: *mut c_void);
 }
