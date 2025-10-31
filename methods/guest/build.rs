@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 fn main() {
-    // Link search path for the current target
     let lean_risc0_path = std::env::var("LEAN_RISC0_PATH").unwrap();
     let lean_libdir = PathBuf::from(lean_risc0_path.clone()).join("lib");
     let risc0_path = std::env::var("RISC0_TOOLCHAIN_PATH").unwrap();
@@ -10,7 +9,6 @@ fn main() {
         .join("lib");
     let includedir = PathBuf::from(lean_risc0_path).join("include");
 
-    // Point rustc to the prebuilt archive and link it statically
     println!("cargo:rustc-link-search=native=lib");
     println!("cargo:rustc-link-search=native={}", lean_libdir.display());
     println!("cargo:rustc-link-search=native={}", risc0_libdir.display());
@@ -24,7 +22,6 @@ fn main() {
     println!("cargo::rustc-link-arg-bins=--allow-multiple-definition");
     println!("cargo::rustc-link-arg-bins=--error-limit=0");
 
-    // The cc crate will be invoked for the guest target set by RISC0’s build flow.
     cc::Build::new()
         .include(includedir.display().to_string())
         .file("risc0_lean.c")
