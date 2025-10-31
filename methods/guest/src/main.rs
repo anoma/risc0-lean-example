@@ -66,8 +66,7 @@ fn safe_lean_risc0_main(input: Vec<u8>) -> Result<Vec<u8>, &'static str> {
 fn main() {
     let input: u32 = env::read();
 
-    let result: Vec<u8> =
-        safe_lean_risc0_main(input.to_string().into_bytes()).expect("lean_risc0_main failed");
+    let result: Vec<u8> = safe_lean_risc0_main(input.to_string().into_bytes()).unwrap();
 
     let value: u32 = String::from_utf8(result)
         .expect("Invalid UTF-8 from Lean")
