@@ -9,21 +9,24 @@ fn main() {
         .join("lib");
     let includedir = PathBuf::from(lean_risc0_path).join("include");
 
+    println!("cargo::rerun-if-changed=risc0_lean.c");
+    println!("cargo::rerun-if-changed=shims.c");
+    println!("cargo::rerun-if-changed=lib");
+
     println!("cargo:rustc-link-search=native=lib");
     println!("cargo:rustc-link-search=native={}", lean_libdir.display());
     println!("cargo:rustc-link-search=native={}", risc0_libdir.display());
-    println!("cargo:rustc-link-lib=static=nosys");
-    println!("cargo:rustc-link-lib=static=c_nano");
+    println!("cargo:rustc-link-lib=static=c");
     println!("cargo:rustc-link-lib=static=stdc++");
     println!("cargo:rustc-link-lib=static=Lean");
     println!("cargo:rustc-link-lib=static=Init");
     println!("cargo:rustc-link-lib=static=Guest");
-    println!("cargo::rustc-link-arg-bins=--unresolved-symbols=ignore-in-object-files");
     println!("cargo::rustc-link-arg-bins=--allow-multiple-definition");
     println!("cargo::rustc-link-arg-bins=--error-limit=0");
 
     cc::Build::new()
         .include(includedir.display().to_string())
+        .file("shims.c")
         .file("risc0_lean.c")
         .flag("-DNDEBUG")
         .flag_if_supported("-O3")

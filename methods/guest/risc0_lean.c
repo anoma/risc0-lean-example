@@ -33,15 +33,11 @@ static char* c_from_byte_array(lean_object* ba, size_t* out_n, int want_nul) {
 
 int lean_risc0_main(const char* src, size_t src_size, char** dst, size_t* dst_size) {
     lean_initialize_runtime_module();
-    lean_set_panic_messages(false);
     lean_object* res = initialize_Guest(1, lean_io_mk_world());
-    lean_set_panic_messages(true);
-    lean_io_mark_end_initialization();
-    if (!lean_io_result_is_ok(res)) {
-        lean_io_result_show_error(res);
-        lean_dec_ref(res);
-        return 1;
-    }
+    // if (!lean_io_result_is_ok(res)) {
+    //     lean_dec_ref(res);
+    //     return 1;
+    // }
     lean_dec_ref(res);
     lean_object* in = byte_array_from_c(src, src_size);
     lean_object* out = risc0_main(in);
