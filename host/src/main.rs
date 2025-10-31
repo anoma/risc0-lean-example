@@ -1,5 +1,6 @@
 use methods::METHOD_ELF;
 use risc0_zkvm::{default_prover, ExecutorEnv};
+use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
