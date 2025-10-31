@@ -9,3 +9,11 @@
 3. Install [Lean RISC0 Init standard library](https://github.com/anoma/lean-risc0-init).
 4. `cargo build --release`
 5. `cargo run --release`
+
+## Main example
+
+The `main` branch contains an example of a `sum` function Lean operating on `Nat`. The example implements a general interface with Lean, passing data via byte arrays which are then parsed to `Nat` on the Lean side. The example properly initializes the runtime.
+
+## Sum example
+
+The `sum-example` branch contains a lightweight example of a `sum` function in Lean operating on 32-bit unsigned integers. This example doesn't perform runtime initialization.
