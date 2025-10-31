@@ -9,6 +9,9 @@ fn main() {
         .join("lib");
     let includedir = PathBuf::from(lean_risc0_path).join("include");
 
+    println!("cargo::rerun-if-changed=risc0_lean.c");
+    println!("cargo::rerun-if-changed=lib");
+
     println!("cargo:rustc-link-search=native=lib");
     println!("cargo:rustc-link-search=native={}", lean_libdir.display());
     println!("cargo:rustc-link-search=native={}", risc0_libdir.display());
