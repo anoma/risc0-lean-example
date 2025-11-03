@@ -3,8 +3,6 @@ risc0_zkvm::guest::entry!(main);
 
 use risc0_zkvm::guest::env;
 
-mod malloc;
-
 extern "C" {
     fn lean_simple_risc0_main(n: u32) -> u32;
 }
