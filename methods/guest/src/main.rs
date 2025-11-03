@@ -1,3 +1,6 @@
+#![no_main]
+risc0_zkvm::guest::entry!(main);
+
 use risc0_zkvm::guest::env;
 use std::ffi::{c_int, c_void};
 
