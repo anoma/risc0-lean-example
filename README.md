@@ -12,7 +12,7 @@
 
 ## Main example
 
-The `main` branch contains an example of a `sum` function Lean operating on `Nat`. The example implements a general interface with Lean, passing data via byte arrays which are then parsed to `Nat` on the Lean side. The example properly initializes the runtime.
+The `main` branch contains an example of a `sum` function in Lean operating on `Nat`. The example implements a general interface to Lean 4, passing data via a byte array which is then parsed to `Nat` on the Lean side. The result is returned in a byte array which is then parsed on the Rust side. The example properly initializes the runtime.
 
 ## Sum example
 
