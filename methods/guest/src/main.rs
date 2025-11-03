@@ -35,7 +35,7 @@ fn safe_lean_risc0_main(input: Vec<u8>) -> Result<Vec<u8>, &'static str> {
     }
 
     if ptr.is_null() {
-        return Err("foo_get_bytes returned NULL");
+        return Err("lean_risc0_main returned NULL");
     }
 
     // If length is zero, don't form a slice from a NULL pointer!
@@ -71,7 +71,7 @@ fn main() {
     let value: u32 = String::from_utf8(result)
         .expect("Invalid UTF-8 from Lean")
         .trim()
-        .parse()
+        .parse::<u32>()
         .expect("Failed to parse output from Lean as u32");
 
     env::commit(&value);
