@@ -22,7 +22,7 @@ The `sum-example` branch contains a lightweight example of a `sum` function in L
 
 ## Running your own Lean 4 program in the RISC Zero zkVM
 
-Replace the `guest/` directory with your Lean 4 project. The supported version of Lean is 4.22.0. You project needs to:
+Replace the `guest/` directory with your Lean 4 project. The supported version of Lean is 4.22.0. Your project needs to:
 - contain a [Guest.lean](https://github.com/anoma/risc0-lean-example/blob/main/guest/Guest.lean) file in its root directory which imports all project modules,
 - define a [risc0_main](https://github.com/anoma/risc0-lean-example/blob/93d47486a0d436a621b617309937cf305fb91501/guest/Guest.lean#L4) function exported to C under this name which serves as the entry point:
 ```lean
@@ -49,3 +49,11 @@ Implementing compilation of Lean 4 to RISC Zero required:
 - providing [shims](https://github.com/anoma/risc0-lean-example/blob/main/methods/guest/shims.c) for some C functions.
 
 The linker for the guest needs the `--allow-multiple-definition` flag, which is fragile and things may fail on a different system.
+
+## Related projects
+
+[György Kurucz](https://kuruczgy.com/) ported Lean to cross-compile to the ESP32-C3 RISC-V microcontroller:
+- [blog post](https://kuruczgy.com/blog/2024/07/31/lean-esp32/),
+- [repository](https://codeberg.org/kuruczgy/lean-esp32).
+
+
